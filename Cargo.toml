@@ -1,6 +1,6 @@
 [package]
 name = "spyro"
-version = "0.1.0"
+version = "0.3.0"
 edition = "2021"
 
 [package.metadata.skyline]
@@ -12,6 +12,8 @@ crate-type = ["cdylib"]
 [dependencies]
 skyline = { git = "https://github.com/ultimate-research/skyline-rs.git" }
 the_csk_collection_api = { git = "https://github.com/Coolsonickirby/the_csk_collection_api.git" }
+skyline_smash = { git = "https://github.com/ultimate-research/skyline-smash.git" }
+param_config = { git = "https://github.com/csharpm7/lib_paramconfig.git" }
 
 [profile.dev]
 panic = "abort"
