@@ -1,4 +1,4 @@
-//! Spyro moveset plugin - v0.3
+//! Spyro moveset plugin - v0.4
 
 #![allow(unused)]
 
@@ -30,7 +30,7 @@ fn register_select_screen() {
     // the other colors follow it in order (c120 ... c127). Setting c01-c07 as well pointed the
     // select screen at portrait layouts that don't exist, which froze it while loading.
     let mut index_maps: HashMap<u64, UnsignedByteType> = HashMap::new();
-    index_maps.insert(hash40("c00_index"), UnsignedByteType::Overwrite(COLOR_START));
+    index_maps.insert(hash40("c00_index"), UnsignedByteType::Overwrite(0)); // TEST v0.4: portrait index 0 (was 120)
 
     add_chara_db_entry_info(CharacterDatabaseEntry {
         ui_chara_id: hash40("ui_chara_spyro"),
@@ -76,3 +76,4 @@ pub fn main() {
     register_select_screen();
     install_stats();
 }
+
