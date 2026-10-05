@@ -1,0 +1,24 @@
+name: Build plugin.nro
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    container:
+      image: wuboyth/skyline-plugin-builder:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          cargo skyline build --release
+          mv ./target/aarch64-skyline-switch/release/libspyro.nro ./plugin.nro
+        env:
+          HOME: /root
+      - name: Upload plugin.nro
+        uses: actions/upload-artifact@v4
+        with:
+          name: spyro_plugin
+          path: plugin.nro
