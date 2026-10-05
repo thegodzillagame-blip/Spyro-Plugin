@@ -1,5 +1,9 @@
-//! Spyro moveset plugin - v0.4
-
+//! Spyro moveset plugin - v0.3
+//! v0.3: select-screen fix. c00_index is the color START (c120) - only it is set, like Funky Kong;
+//!       Duck Hunt has a single layout entry (ui_chara_duckhunt_00), so Spyro gets a single one too.
+//! v0.2: stats moved from config_param.toml into the plugin (still applied by the Param Config plugin).
+//! Step 1: register Spyro on the character select screen (CSK Collection),
+//! as a duplicate of Duck Hunt using Duck Hunt's costume slots c120-c127.
 #![allow(unused)]
 
 use std::collections::HashMap;
@@ -38,6 +42,9 @@ fn register_select_screen() {
         // "spyro" is what the name labels (nam_chr1_00_spyro ...) and portraits (chara_1_spyro_00 ...) use
         name_id: StringType::Overwrite(CStrCSK::new("spyro")),
         color_num: UnsignedByteType::Overwrite(COLOR_NUM),
+        // his own square on the select screen (copying Duck Hunt's would stack him on top of Duck Hunt;
+        // the base game uses 0-86, other added fighters likely 87-89; values past the fighter count freeze the CSS)
+        disp_order: SignedByteType::Overwrite(90),
         extra_index_maps: UnsignedByteMap::Overwrite(index_maps),
         ..Default::default()
     });
@@ -76,4 +83,3 @@ pub fn main() {
     register_select_screen();
     install_stats();
 }
-
